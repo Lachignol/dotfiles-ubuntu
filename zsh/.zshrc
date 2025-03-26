@@ -5,6 +5,8 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Lancer l'agent ssh au demarrage.
+eval $(ssh-agent -s)
 
 
 # Path to your golang.
