@@ -8,11 +8,16 @@ export ZSH="$HOME/.oh-my-zsh"
 # Lancer l'agent ssh au demarrage.
 eval $(ssh-agent -s)
 
-
 # Path to your golang.
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+
+#configure l'environnement pour Homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+#Cette commande permet d'exécuter des scripts ou des programmes situés dans le répertoire .venv/bin sans avoir à spécifier le chemin complet
+export PATH=$PATH:$HOME/.venv/bin
 
 #Creation d'une variable avec le chemin du fichier.txt ou j'ai placer mon ascii code"
 Banner= cat $HOME/.config/zsh/banners/currentBanner.txt
@@ -34,9 +39,6 @@ echo -E  $Banner
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="lambda"
-
-
-
 
 
 # Set list of themes to pick from when loading at random
@@ -138,8 +140,6 @@ zsh-syntax-highlighting
 #fichier source pour tous mes aliases
 source ~/.config/zsh/aliases/aliases.zsh
 
-
 #fichier source pour oh-my-zsh
 source $ZSH/oh-my-zsh.sh
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-export PATH=$PATH:/home/fantomas/.venv/bin
+
