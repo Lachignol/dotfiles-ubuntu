@@ -12,7 +12,20 @@ export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-
+#Creation d'une variable avec le chemin du fichier.txt ou j'ai placer mon ascii code"
+Banner= cat $HOME/.config/zsh/banners/currentBanner.txt
+# Banner= cat $HOME/.config/zsh/banners/bobby_du_campus.txt
+# Banner= cat $HOME/.config/zsh/banners/shooter.txt
+# Banner= cat $HOME/.config/zsh/banners/gogo_gadget.txt
+# Banner= cat $HOME/.config/zsh/banners/judge_dredd.txt
+# Banner= cat $HOME/.config/zsh/banners/south_park_team.txt
+# Banner= cat $HOME/.config/zsh/banners/kenny.txt
+# Banner= cat $HOME/.config/zsh/banners/kyle.txt
+# Banner= cat $HOME/.config/zsh/banners/butters.txt
+# Banner= cat $HOME/.config/zsh/banners/leela.txt
+#Affichage du fichier dans le terminal(il s'execute a chaque ouverture de terminal en gros a chaque fois que le fichier .zshrc est lu) 
+#Pour info echo -E affiche sans prendre en compte les caractères d'echapement
+echo -E  $Banner
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
