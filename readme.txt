@@ -1,6 +1,8 @@
-1)Telecharger Stow
+1)cloner le repos dans ~ (/home)
 
-2)Tapez cd ~/dotfiles 
+2)Telecharger Stow
+
+3)Tapez cd ~/dotfiles 
 Puis faire stow pour tout ce que l'on veu link:
 
 Exemple:
