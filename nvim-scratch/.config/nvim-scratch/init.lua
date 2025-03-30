@@ -1,7 +1,7 @@
 vim.opt.runtimepath:prepend(vim.fn.expand("~/.config/nvim-scratch"))
 package.path = package.path .. ";" .. vim.fn.expand("~/.config/nvim-scratch/lua/?.lua")
-require("config.keymaps")
 require("config.options")
+require("config.keymaps")
 require("config.lazy")
 require("config.buffer_and_history")
 require("config.lsp_config")
