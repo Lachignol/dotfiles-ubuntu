@@ -36,6 +36,10 @@ require("lspconfig").gopls.setup({
 })
 
 -- Configuration spécifique pour clangd (C/C++)
-require("lspconfig").clangd.setup({})
+require("lspconfig").clangd.setup({
+	on_attach = function(client, bufnr)
+		client.server_capabilities.documentFormattingProvider = false -- Désactive le formateur
+	end,
+})
 
 lsp_zero.setup()

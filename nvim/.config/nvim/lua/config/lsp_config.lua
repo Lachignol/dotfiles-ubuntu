@@ -1,3 +1,9 @@
+-- Configuration spécifique pour clangd (C/C++)
+require("lspconfig").clangd.setup({
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false -- Désactive le formateur
+  end,
+})
 -- local lspconfig = require("lspconfig")
 --
 -- -- Configuration minimale pour clangd avec uniquement la navigation vers la définition
