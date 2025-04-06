@@ -4,8 +4,8 @@ return {
   config = function()
     require('toggleterm').setup {
       size = 20, -- Taille du terminal
-      open_mapping = [[<c-\>]], -- Raccourci pour ouvrir le terminal
-      direction = 'vertical', -- Direction du terminal (horizontal, vertical, float)
+      open_mapping = [[<c-/>]], -- Raccourci pour ouvrir le terminal
+      direction = 'float', -- Direction du terminal (horizontal, vertical, float)
       shell = '/bin/zsh', -- Utiliser zsh comme shell
       close_on_exit = true, -- Fermer le terminal à la sortie
       start_in_insert = true, -- Commencer en mode insertion
