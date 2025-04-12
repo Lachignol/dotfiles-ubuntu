@@ -3,5 +3,6 @@ package.path = package.path .. ";" .. vim.fn.expand("~/.config/nvim-scratch/lua/
 require("config.options")
 require("config.keymaps")
 require("config.lazy")
+require("config.debuger_keymaps")
 require("config.lsp_config")
 require("config.buffer_and_history")
