@@ -52,3 +52,8 @@ vim.api.nvim_set_keymap("i", "<Up>", "", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "<Down>", "", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "<Left>", "", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "<Right>", "", { noremap = true, silent = true })
+
+-------Mapper Ctrl-S pour enregistrer le buffer---------------------------------------
+vim.keymap.set("n", "<C-s>", ":w<CR>", { noremap = true, silent = true }) -- Mode normal
+vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>a", { noremap = true, silent = true }) -- Mode insertion
+
