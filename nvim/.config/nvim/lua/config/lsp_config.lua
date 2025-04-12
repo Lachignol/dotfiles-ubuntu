@@ -1,38 +1,113 @@
--- Configuration spécifique pour clangd (C/C++)
-require("lspconfig").clangd.setup({
-  on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = false -- Désactive le formateur
-  end,
+-- Importer les modules nécessaires
+local lspconfig = require("lspconfig")
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
+local cmp = require("cmp")
+local luasnip = require("luasnip")
+
+-- Configurer Mason
+mason.setup()
+
+-- Configurer Mason-LSPConfig
+mason_lspconfig.setup({
+  ensure_installed = { "gopls", "lua_ls", "pyright", "clangd", "tsserver" }, -- Liste des serveurs à installer automatiquement
 })
--- local lspconfig = require("lspconfig")
---
--- -- Configuration minimale pour clangd avec uniquement la navigation vers la définition
--- lspconfig.clangd.setup({
---   cmd = {
---     "clangd",
---     "--header-insertion=never", -- Ignorez les erreurs d'insertion d'en-tête
---     "--enable-config", -- Permet l'utilisation de .clangd pour la configuration
---   },
---   on_attach = function(client)
---     -- Désactiver toutes les fonctionnalités sauf la navigation vers la définition
---     client.server_capabilities.documentFormattingProvider = false
---     client.server_capabilities.documentRangeFormattingProvider = false
---     client.server_capabilities.diagnosticsProvider = false
---     client.server_capabilities.completionProvider = {
---       resolveProvider = false,
---       triggerCharacters = {},
---     }
---     client.server_capabilities.signatureHelpProvider = false
---     client.server_capabilities.codeActionProvider = false
---     client.server_capabilities.codeLensProvider = false
---     client.server_capabilities.documentHighlightProvider = false
---     client.server_capabilities.documentSymbolProvider = false
---     client.server_capabilities.workspaceSymbolProvider = false
---     client.server_capabilities.callHierarchyProvider = false
---     client.server_capabilities.typeHierarchyProvider = false
---     client.server_capabilities.inlayHintProvider = false
---
---     -- La capacité de navigation vers la définition est activée par défaut,
---     -- donc pas besoin de la configurer explicitement.
---   end,
--- })
+
+-- Fonction on_attach : pour définir les keymaps spécifiques au LSP
+local on_attach = function(client, bufnr)
+  local opts = { buffer = bufnr }
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- Affiche la documentation
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts) -- Aller à la définition
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, opts) -- Voir les références
+  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- Renommer une variable
+  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts) -- Actions de code (fixes, suggestions)
+  vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts) -- Affiche les diagnostics
+  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- Diagnostic précédent
+  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- Diagnostic suivant
+end
+
+-- Configurer nvim-cmp pour l'autocomplétion
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body) -- Utilise LuaSnip pour l'expansion des snippets
+    end,
+  },
+  mapping = {
+    ['<C-n>'] = cmp.mapping.select_next_item(), -- Sélectionne l'élément suivant
+    ['<C-p>'] = cmp.mapping.select_prev_item(), -- Sélectionne l'élément précédent
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),    -- Défile les docs vers le haut
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),     -- Défile les docs vers le bas
+    ['<C-Space>'] = cmp.mapping.complete(),     -- Ouvre l'autocomplétion manuellement
+    ['<C-y>'] = cmp.mapping.confirm({ select = true }), -- Confirme la sélection
+    ['<C-e>'] = cmp.mapping.abort(),            -- Annule l'autocomplétion
+  },
+  sources = {
+    { name = 'nvim_lsp' },   -- Source LSP
+    { name = 'buffer' },     -- Source pour le contenu du buffer
+    { name = 'path' },       -- Source pour les chemins de fichiers
+    { name = 'cmdline' },    -- Source pour la ligne de commande
+  },
+})
+
+-- Afficher les diagnostics dans Neovim
+vim.diagnostic.config({
+  virtual_text = true, -- Affiche les diagnostics en ligne
+  signs = true,        -- Affiche des signes dans la colonne de gauche
+  underline = true,    -- Souligne le texte affecté par un diagnostic
+})
+
+-- Configuration des serveurs LSP
+
+-- gopls (Go)
+lspconfig.gopls.setup({
+  on_attach = function(client, bufnr)
+    local opts = { buffer = bufnr }
+    -- Raccourcis LSP pour Go
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- Affiche la documentation
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts) -- Aller à la définition
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts) -- Voir les références
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- Renommer une variable
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts) -- Actions de code
+    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts) -- Affiche les diagnostics
+    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- Diagnostic précédent
+    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- Diagnostic suivant
+  end,
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,  -- Analyser les paramètres inutilisés
+      },
+      staticcheck = true,  -- Activer les vérifications statiques
+      completeUnimported = true,  -- Compléter les imports non utilisés
+    },
+  },
+  root_dir = lspconfig.util.root_pattern("go.mod", ".git") or vim.fn.getcwd(),  -- Détecter la racine du projet Go avec go.mod
+})
+-- lua_ls (Lua)
+lspconfig.lua_ls.setup({
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" }, -- Éviter les erreurs pour les variables globales comme 'vim'
+      },
+    },
+  },
+})
+
+-- pyright (Python)
+lspconfig.pyright.setup({
+  on_attach = on_attach,
+})
+
+-- clangd (C/C++)
+lspconfig.clangd.setup({
+  on_attach = on_attach,
+})
+
+-- tsserver (TypeScript/JavaScript)
+lspconfig.tsserver.setup({
+  on_attach = on_attach,
+})
+

@@ -4,19 +4,20 @@
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
-# Lancer l'agent ssh au demarrage.
-eval $(ssh-agent -s)
-
-# Path to your golang.
+# Lancer l'agent SSH au démarrage
+eval "$(ssh-agent -s)"
+# Ajouter Go au PATH
 export PATH=$PATH:/usr/local/go/bin
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
 
-#configure l'environnement pour Homebrew
+# Définir GOPATH (utile pour les anciens projets Go)
+export GOPATH=$HOME/go
+
+# Ajouter GOPATH/bin au PATH
+export PATH=$PATH:$GOPATH/bin
+# Configurer l'environnement pour Homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-#Cette commande permet d'exécuter des scripts ou des programmes situés dans le répertoire .venv/bin sans avoir à spécifier le chemin complet
+# Ajouter le répertoire .venv/bin au PATH pour exécuter des scripts ou programmes Python
 export PATH=$PATH:$HOME/.venv/bin
 
 #Creation d'une variable avec le chemin du fichier.txt ou j'ai placer mon ascii code"
