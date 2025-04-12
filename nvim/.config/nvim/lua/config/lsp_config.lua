@@ -10,7 +10,7 @@ mason.setup()
 
 -- Configurer Mason-LSPConfig
 mason_lspconfig.setup({
-  ensure_installed = { "gopls", "lua_ls", "pyright", "clangd", "tsserver" }, -- Liste des serveurs à installer automatiquement
+  ensure_installed = { "gopls", "lua_ls", "pyright", "clangd", "ts_ls" }, -- Liste des serveurs à installer automatiquement
 })
 
 -- Fonction on_attach : pour définir les keymaps spécifiques au LSP
@@ -61,29 +61,19 @@ vim.diagnostic.config({
 
 -- gopls (Go)
 lspconfig.gopls.setup({
-  on_attach = function(client, bufnr)
-    local opts = { buffer = bufnr }
-    -- Raccourcis LSP pour Go
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- Affiche la documentation
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts) -- Aller à la définition
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts) -- Voir les références
-    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- Renommer une variable
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts) -- Actions de code
-    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts) -- Affiche les diagnostics
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- Diagnostic précédent
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- Diagnostic suivant
-  end,
+  on_attach = on_attach,
   settings = {
     gopls = {
       analyses = {
         unusedparams = true,  -- Analyser les paramètres inutilisés
       },
-      staticcheck = true,  -- Activer les vérifications statiques
-      completeUnimported = true,  -- Compléter les imports non utilisés
+      staticcheck = true,      -- Activer les vérifications statiques
+      completeUnimported = true, -- Compléter les imports non utilisés
     },
   },
-  root_dir = lspconfig.util.root_pattern("go.mod", ".git") or vim.fn.getcwd(),  -- Détecter la racine du projet Go avec go.mod
+  root_dir = lspconfig.util.root_pattern("go.mod", ".git") or vim.fn.getcwd(), -- Détecter la racine du projet Go avec go.mod ou .git
 })
+
 -- lua_ls (Lua)
 lspconfig.lua_ls.setup({
   on_attach = on_attach,
@@ -107,7 +97,7 @@ lspconfig.clangd.setup({
 })
 
 -- tsserver (TypeScript/JavaScript)
-lspconfig.tsserver.setup({
+lspconfig.ts_ls.setup({
   on_attach = on_attach,
 })
 

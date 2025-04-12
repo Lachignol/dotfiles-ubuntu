@@ -47,23 +47,23 @@ require("lazy").setup({
             }
           end
         },
+	-- None-LS pour les formateurs et linters
+	{
+	    "nvimtools/none-ls.nvim",
+	    event = { "BufReadPre", "BufNewFile" },
+	    dependencies = { "nvim-lua/plenary.nvim" },
+	    config = function()
+		local null_ls = require("null-ls") -- Le module reste nommé null-ls pour des raisons de compatibilité
+		null_ls.setup({
+		    sources = {
+			null_ls.builtins.formatting.stylua, -- Formateur Lua
+			-- null_ls.builtins.diagnostics.flake8, -- Linter Python
+			-- null_ls.builtins.formatting.black, -- Formateur Python
+		    },
+		})
+	    end,
+	},
 
-        -- Null-LS for formatters and linters
-        {
-            "jose-elias-alvarez/null-ls.nvim",
-            event = { "BufReadPre", "BufNewFile" },
-            dependencies = { "nvim-lua/plenary.nvim" },
-            config = function()
-                local null_ls = require("null-ls")
-                null_ls.setup({
-                    sources = {
-                        null_ls.builtins.formatting.stylua, -- Lua formatter
-                        -- null_ls.builtins.diagnostics.flake8, -- Python linter
-                        -- null_ls.builtins.formatting.black, -- Python formatter
-                    },
-                })
-            end,
-        },
 
         -- Golang tools
         { "golang/tools",
