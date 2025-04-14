@@ -13,10 +13,11 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
 })
 
 -- Highlight on yank
-vim.api.nvim_create_autocmd('TextYankPost', {
-  group = augroup 'highlight_yank',
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup("highlight_yank"),
+  pattern = "*",
   callback = function()
-    (vim.hl or vim.highlight).on_yank()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
   end,
 })
 

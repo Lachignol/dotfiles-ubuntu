@@ -111,7 +111,5 @@ config.keys = {
   },
 }
 
-config.disable_default_key_bindings = true
-
 return config
 
