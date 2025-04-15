@@ -92,10 +92,9 @@ lspconfig.pyright.setup({
 })
 
 -- clangd (C/C++)
-lspconfig.clangd.setup({
-  on_attach = on_attach,
-})
-
+require("lspconfig").clangd.setup {
+  cmd = { "clangd", "--background-index", "--header-insertion=never" },
+}
 -- tsserver (TypeScript/JavaScript)
 lspconfig.ts_ls.setup({
   on_attach = on_attach,
