@@ -95,22 +95,48 @@ lspconfig.pyright.setup({
 lspconfig.clangd.setup({
   cmd = { "clangd", "--background-index","--header-insertion=never" },
   on_attach = function(client, bufnr)
-    vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
-      if not result or not result.diagnostics then return end
+    local opts = { buffer = bufnr }
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- Affiche la documentation
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts) -- Aller à la définition
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- Aller à la déclaration
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts) -- Voir les références
 
-      local filtered_diagnostics = {}
-      for _, diagnostic in ipairs(result.diagnostics) do
-        if not diagnostic.message:find("Included header") then
-          table.insert(filtered_diagnostics, diagnostic)
+    vim.lsp.handlers["textDocument/publishDiagnostics"] =
+      function(_, result, ctx, config)
+        if not result or not result.diagnostics then return end
+
+        local filtered_diagnostics = {}
+        for _, diagnostic in ipairs(result.diagnostics) do
+          if not diagnostic.message:find("Included header") then
+            table.insert(filtered_diagnostics, diagnostic)
+          end
         end
-      end
 
-      result.diagnostics = filtered_diagnostics
-      vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
-    end
+        result.diagnostics = filtered_diagnostics
+        vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+      end
   end,
 })
 
+-- lspconfig.clangd.setup({
+--   cmd = { "clangd", "--background-index","--header-insertion=never" },
+--   on_attach = function(client, bufnr)
+--     vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
+--       if not result or not result.diagnostics then return end
+--
+--       local filtered_diagnostics = {}
+--       for _, diagnostic in ipairs(result.diagnostics) do
+--         if not diagnostic.message:find("Included header") then
+--           table.insert(filtered_diagnostics, diagnostic)
+--         end
+--       end
+--
+--       result.diagnostics = filtered_diagnostics
+--       vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+--     end
+--   end,
+-- })
+--
 -- lspconfig.clangd.setup({
   -- cmd = { "clangd", "--header-insertion=never" },
 -- })
