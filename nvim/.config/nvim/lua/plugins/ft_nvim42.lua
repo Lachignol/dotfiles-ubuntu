@@ -1,4 +1,3 @@
--- Exemple de configuration de lazy.nvim
 return {
   "vinicius507/ft_nvim",
   cmd = { "FtHeader", "Norme" },
@@ -20,3 +19,4 @@ return {
     })
   end,
 }
+
