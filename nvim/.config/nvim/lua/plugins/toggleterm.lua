@@ -1,31 +1,42 @@
 return {
   'akinsho/toggleterm.nvim',
-  version = '*', -- Assurez-vous d'utiliser la dernière version
+  version = '*',
   config = function()
-    -- Configuration par défaut du plugin
     require('toggleterm').setup {
-      size = 20, -- Taille du terminal
-      open_mapping = [[<c-/>]], -- Raccourci pour ouvrir le terminal en mode flottant
-      direction = 'float', -- Direction par défaut du terminal (float)
-      shell = '/bin/zsh', -- Utiliser zsh comme shell
-      close_on_exit = true, -- Fermer le terminal à la sortie
-      start_in_insert = true, -- Commencer en mode insertion
-      insert_mappings = true, -- Activer les mappages en mode insertion
-      terminal_mappings = true, -- Activer les mappages pour le terminal
+      size = function(term)
+        if term.direction == "horizontal" then
+          return 20
+        elseif term.direction == "vertical" then
+          return 60
+        end
+      end,
+      open_mapping = [[<c-_>]], -- Ouvre par défaut avec Ctrl + _
+      direction = 'horizontal',
+      shell = '/bin/zsh',
+      close_on_exit = true,
+      start_in_insert = true,
+      insert_mappings = true,
+      terminal_mappings = true,
       highlights = {
         Normal = {
-          guifg = '#ffffff', -- Couleur de texte
-          guibg = '#1e1e1e', -- Couleur de fond
+          guifg = '#ffffff',
+          guibg = '#1e1e1e',
         },
         NormalFloat = {
-          link = 'Normal', -- Lien vers Normal pour les fenêtres flottantes
+          link = 'Normal',
         },
       },
     }
 
-    -- Définir les mappages pour ouvrir le terminal en mode flottant ou vertical
-    vim.api.nvim_set_keymap('n', '<c-/>', ':ToggleTerm direction=horizontal<CR>', { noremap = true, silent = true })  -- Ouvrir en bas avec Ctrl+/
-    vim.api.nvim_set_keymap('n', '<c-\\>', ':ToggleTerm direction=vertical<CR>', { noremap = true, silent = true })  -- Ouvrir sur la droite avec Ctrl+\
+    -- 🧩 Raccourcis personnalisés
+
+    -- Ctrl + _ → terminal horizontal
+    vim.api.nvim_set_keymap('n', '<c-_>', '<cmd>ToggleTerm direction=horizontal<CR>', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('t', '<c-_>', '<cmd>ToggleTerm<CR>', { noremap = true, silent = true })
+
+    -- Ctrl + \ → terminal vertical
+    vim.api.nvim_set_keymap('n', '<c-\\>', '<cmd>ToggleTerm direction=vertical<CR>', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('t', '<c-\\>', '<cmd>ToggleTerm<CR>', { noremap = true, silent = true })
   end,
 }
 
