@@ -6,6 +6,16 @@
 export ZSH="$HOME/.oh-my-zsh"
 # Lancer l'agent SSH au démarrage
 eval "$(ssh-agent -s)"
+
+# Ajoute les clef commencant par id_ dans le dossier .ssh Vérifier si la clé est déjà dans l'agent avant de l'ajouter
+for key in ~/.ssh/id_*; do
+    if [ -f "$key" ]; then
+        if ! ssh-add -l | grep -q "$(ssh-keygen -lf "$key" | awk '{print $2}')"; then
+            ssh-add "$key" </dev/null > /dev/null 2>&1
+        fi
+    fi
+done
+
 # Ajouter Go au PATH
 export PATH=$PATH:/usr/local/go/bin
 
