@@ -10,7 +10,7 @@ return {
           return 60
         end
       end,
-      open_mapping = [[<c-_>]], -- Ouvre par défaut avec Ctrl + _
+      open_mapping = [[<c-\\>]], -- Ouvre par défaut avec Ctrl + _
       direction = 'horizontal',
       shell = '/bin/zsh',
       close_on_exit = true,
@@ -31,12 +31,12 @@ return {
     -- 🧩 Raccourcis personnalisés
 
     -- Ctrl + _ → terminal horizontal
-    vim.api.nvim_set_keymap('n', '<c-_>', '<cmd>ToggleTerm direction=horizontal<CR>', { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('t', '<c-_>', '<cmd>ToggleTerm<CR>', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('n', '<c-\\>', '<cmd>ToggleTerm direction=horizontal<CR>', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('t', '<c-\\>', '<cmd>ToggleTerm<CR>', { noremap = true, silent = true })
 
     -- Ctrl + \ → terminal vertical
-    vim.api.nvim_set_keymap('n', '<c-\\>', '<cmd>ToggleTerm direction=vertical<CR>', { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('t', '<c-\\>', '<cmd>ToggleTerm<CR>', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('n', '<c-|>', '<cmd>ToggleTerm direction=vertical<CR>', { noremap = true, silent = true })
+    vim.api.nvim_set_keymap('t', '<c-|>', '<cmd>ToggleTerm<CR>', { noremap = true, silent = true })
   end,
 }
 
