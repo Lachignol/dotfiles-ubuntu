@@ -41,15 +41,16 @@ config.keys = {
     action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
   },
   -- Copier (ergonomique)
-  {
-    key = 'c',
-    mods = 'CTRL',
-    action = wezterm.action.CopyTo 'Clipboard',
-  },
+{
+  key = 'c',
+  mods = 'SHIFT|CTRL',
+  action = wezterm.action.CopyTo 'Clipboard',
+},
+
   -- Coller (ergonomique)
   {
     key = 'v',
-    mods = 'CTRL',
+    mods = 'SHIFT|CTRL',
     action = wezterm.action.PasteFrom 'Clipboard',
   },
   -- Fermer le panneau actuel
