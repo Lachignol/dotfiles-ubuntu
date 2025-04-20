@@ -104,9 +104,6 @@ config.keys = {
   },
 }
 
--- Pour utiliser la touche 'Ctrl' pour déplacer entre les panneaux de manière plus fluide
-config.disable_default_key_bindings = true
-
 -- Définir un thème de couleurs
 config.color_scheme = "Catppuccin"  -- Assure-toi que le thème Catppuccin est installé dans ton WezTerm (ou remplace par un autre thème si tu préfères)
 
