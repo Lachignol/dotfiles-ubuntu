@@ -1,4 +1,13 @@
 return {
+	--cyberdream
+{
+	"scottmckendry/cyberdream.nvim",
+	lazy = false,
+	priority = 1000,
+    config = function()
+      vim.cmd.colorscheme("cyberdream") --- voici la cmd pour defenir le theme par default
+    end,
+},
   -- Catppuccin
   {
     "catppuccin/nvim",
@@ -6,7 +15,6 @@ return {
     priority = 1000,
     config = function()
       require("catppuccin").setup({ flavour = "mocha" }) -- Choisissez votre variante ici : latte, frappe, macchiato, mocha
-      vim.cmd.colorscheme("catppuccin") --- voici la cmd pour defenir le theme par default
     end,
   },
   

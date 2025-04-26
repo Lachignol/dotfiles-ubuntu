@@ -106,7 +106,7 @@ config.keys = {
 }
 
 -- Définir un thème de couleurs
-config.color_scheme = "Catppuccin"  -- Assure-toi que le thème Catppuccin est installé dans ton WezTerm (ou remplace par un autre thème si tu préfères)
+config.colors = require("cyberdream")  -- Assure-toi que le thème Catppuccin est installé dans ton WezTerm (ou remplace par un autre thème si tu préfères)
 
 -- Réglages supplémentaires pour améliorer l'expérience avec Neovim
 config.window_padding = {
@@ -118,9 +118,6 @@ config.window_padding = {
 
 -- Réglage du rendu de la barre de défilement
 config.scrollback_lines = 10000  -- Nombre de lignes de défilement en mémoire
-
--- Activation du mode Wayland si nécessaire
-config.enable_wayland = true
 
 return config
 
