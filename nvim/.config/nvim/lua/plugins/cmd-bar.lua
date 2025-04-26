@@ -6,7 +6,7 @@ return {
       enabled = true,
       view = "cmdline_popup",
       format = {
-        cmdline = { icon = "faut que je trouve un truc drole >" },
+        cmdline = { icon = "Talk to me boss>" },
         search_down = { icon = "🔍" },
         search_up = { icon = "🔍" },
         filter = { icon = "$" },
