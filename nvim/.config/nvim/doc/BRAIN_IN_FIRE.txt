@@ -1,1 +1,6 @@
 Apres avoir utilise lazyvim je saute le pas et me lance dans la creation from scratch de ma config le chemin sera long et ma patience mis a rude epreuve mais on en reparlera
+
+Avoir :
+sudo apt install ripgrep
+sudo apt install unzip  
+
