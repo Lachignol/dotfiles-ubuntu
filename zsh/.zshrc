@@ -27,7 +27,20 @@ export PATH=$PATH:$GOPATH/bin
 # Configurer l'environnement pour Homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+<<<<<<< Updated upstream
 # Ajouter le répertoire .venv/bin au PATH pour exécuter des scripts ou programmes Python
+=======
+#configure mes deux neovim 
+nvim_config() {
+  if [[ "$1" == "scratch" ]]; then
+    NVIM_APPNAME="nvim-scratch" command nvim
+  else
+    NVIM_APPNAME="nvim" command nvim
+  fi
+}
+
+#Cette commande permet d'exécuter des scripts ou des programmes situés dans le répertoire .venv/bin sans avoir à spécifier le chemin complet
+>>>>>>> Stashed changes
 export PATH=$PATH:$HOME/.venv/bin
 
 #Creation d'une variable avec le chemin du fichier.txt ou j'ai placer mon ascii code"
