@@ -12,17 +12,25 @@ return {
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
 
-    -- Débogueurs supplémentaires, ajoute tes propres débogueurs ici
+    -- Débogueur Go (ajoute tes propres débogueurs ici)
     'leoluz/nvim-dap-go',
   },
   keys = {
-    -- Démarrer ou reprendre le débogage
+    -- Lancer ou reprendre le débogage avec <leader>ds
+    {
+      '<leader>ds',
+      function()
+        require('dap').continue()
+      end,
+      desc = 'Debug: Start/Continue (ds)',
+    },
+    -- Démarrer ou reprendre le débogage avec F5
     {
       '<F5>',
       function()
         require('dap').continue()
       end,
-      desc = 'Debug: Start/Continue',  -- Démarrer ou continuer le débogage
+      desc = 'Debug: Start/Continue',
     },
     -- Passer dans la fonction (step into)
     {
@@ -30,7 +38,7 @@ return {
       function()
         require('dap').step_into()
       end,
-      desc = 'Debug: Step Into',  -- Passer dans la fonction
+      desc = 'Debug: Step Into',
     },
     -- Passer à l’instruction suivante (step over)
     {
@@ -38,7 +46,7 @@ return {
       function()
         require('dap').step_over()
       end,
-      desc = 'Debug: Step Over',  -- Passer à l’instruction suivante
+      desc = 'Debug: Step Over',
     },
     -- Sortir de la fonction (step out)
     {
@@ -46,23 +54,23 @@ return {
       function()
         require('dap').step_out()
       end,
-      desc = 'Debug: Step Out',  -- Sortir de la fonction
+      desc = 'Debug: Step Out',
     },
     -- Basculer un point d’arrêt
     {
-      '<leader>b',
+      '<leader>db',
       function()
         require('dap').toggle_breakpoint()
       end,
-      desc = 'Debug: Toggle Breakpoint',  -- Ajouter ou supprimer un point d'arrêt
+      desc = 'Debug: Toggle Breakpoint',
     },
     -- Définir un point d’arrêt avec une condition
     {
-      '<leader>B',
+      '<leader>dB',
       function()
         require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
       end,
-      desc = 'Debug: Set Breakpoint',  -- Définir un point d’arrêt avec condition
+      desc = 'Debug: Set Breakpoint',
     },
     -- Basculer l'affichage de la dernière session de débogage
     {
@@ -70,7 +78,7 @@ return {
       function()
         require('dapui').toggle()
       end,
-      desc = 'Debug: See last session result.',  -- Voir le résultat de la dernière session de débogage
+      desc = 'Debug: See last session result.',
     },
   },
   config = function()
@@ -84,7 +92,7 @@ return {
       handlers = {},  -- Tu peux configurer des gestionnaires ici si nécessaire
 
       ensure_installed = {
-        -- Assurer que le débogueur Delve pour Go est installé
+        -- S'assurer que le débogueur Delve pour Go est installé
         'delve',
       },
     }
@@ -107,7 +115,7 @@ return {
       },
     }
 
-    -- Configurer les écouteurs pour l'ouverture et la fermeture de l'interface DAP UI
+    -- Ouvrir automatiquement le UI dapui quand le debug commence, et le fermer à la fin
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
