@@ -76,23 +76,23 @@ return {
         desc = "Toggle Snacks Explorer",
       },
 
-      -- Ouvre le picker intelligent (fichiers, projets, etc.)
-      { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-
-      -- Liste les buffers ouverts
-      { "<leader>b", function() Snacks.picker.buffers() end, desc = "Buffers" },
-
-      -- Recherche texte dans le projet (grep)
-      { "<leader>g", function() Snacks.picker.grep() end, desc = "Grep" },
+      -- -- Ouvre le picker intelligent (fichiers, projets, etc.)
+      -- { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+      --
+      -- -- Liste les buffers ouverts
+      -- { "<leader>b", function() Snacks.picker.buffers() end, desc = "Buffers" },
+      --
+      -- -- Recherche texte dans le projet (grep)
+      -- { "<leader>g", function() Snacks.picker.grep() end, desc = "Grep" },
 
       -- Historique des commandes
       { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
 
       -- Historique des notifications
       { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
-
-      -- Ouvre LazyGit dans une fenêtre flottante
-      { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+      --
+      -- -- Ouvre LazyGit dans une fenêtre flottante
+      -- { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
 
       -- Ferme toutes les notifications
       { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },

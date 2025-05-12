@@ -92,10 +92,9 @@ return {
   end,
   keys = {
     { "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-    { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
-    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-    { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
+    { "<leader>g<leader>", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
+    { "<leader>b<leader>", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+    { "<leader>h<leader>", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
   },
 }
 
