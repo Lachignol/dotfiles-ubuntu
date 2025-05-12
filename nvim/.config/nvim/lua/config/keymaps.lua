@@ -31,9 +31,9 @@ map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 -- spliter les fenetre avec espace + w + v
-vim.keymap.set("n", "<leader>wv", ":vsplit<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>wv", ":vsplit<CR><C-w>l", { noremap = true, silent = true }) -- split vertical et focus à droite
 -- spliter les fenetre avec espace + w + h
-vim.keymap.set("n", "<leader>wh", ":split<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>wh", ":split<CR><C-w>j", { noremap = true, silent = true })  -- split horizontal et focus en bas
 -- pour fermer la fenetre avec espace + w + d
 vim.keymap.set("n", "<leader>wd", ":q<CR>", { noremap = true, silent = true })
 

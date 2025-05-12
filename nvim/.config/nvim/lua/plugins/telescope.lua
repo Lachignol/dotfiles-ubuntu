@@ -7,10 +7,10 @@ return {
   },
   config = function()
     local telescope = require("telescope")
-    
+    local actions = require("telescope.actions")
+
     telescope.setup({
       defaults = {
-        -- Arguments de la recherche avec `ripgrep` (rg)
         vimgrep_arguments = {
           "rg",
           "--color=never",
@@ -20,27 +20,43 @@ return {
           "--column",
           "--smart-case",
           "--no-ignore",
-          "--hidden",  -- Inclut les fichiers cachés
-          "--glob", "!target/**",  -- Exclut le dossier 'target'
-          "--glob", "!**/*.o",     -- Exclut les fichiers '.o'
-          "--glob", "!**/*.so",    -- Exclut les fichiers '.so'
-          "--glob", "!**/*.bin",   -- Exclut les fichiers '.bin'
-          "--glob", "!**/*.exe",   -- Exclut les fichiers '.exe'
-          "--glob", "!**/*.dll",   -- Exclut les fichiers '.dll'
-          "--glob", "!**/*.class", -- Exclut les fichiers '.class'
-          "--glob", "!**/*.wasm",  -- Exclut les fichiers '.wasm'
+          "--hidden",
+          "--glob", "!target/**",
+          "--glob", "!**/*.o",
+          "--glob", "!**/*.so",
+          "--glob", "!**/*.bin",
+          "--glob", "!**/*.exe",
+          "--glob", "!**/*.dll",
+          "--glob", "!**/*.class",
+          "--glob", "!**/*.wasm",
         },
-        -- Configuration générale des pickers (recherches)
+        layout_strategy = "horizontal",
         layout_config = {
-          preview_width = 0.6,  -- Largeur de l'aperçu dans la fenêtre (60%)
+          horizontal = {
+            preview_width = 0.6,
+            prompt_position = "top",  -- Input en haut, résultats en dessous
+          },
+          vertical = {
+            prompt_position = "top",
+          },
         },
+        sorting_strategy = "ascending", -- <-- C'est CETTE OPTION qui garantit que le premier résultat est en haut !
         preview = {
-          hide_on_startup = false,  -- Ne pas masquer l'aperçu au démarrage
-          file_sorter = require("telescope.sorters").get_fuzzy_file, -- Trier les fichiers
+          hide_on_startup = false,
+          file_sorter = require("telescope.sorters").get_fuzzy_file,
+        },
+        mappings = {
+          i = {
+            ["<C-n>"] = actions.move_selection_next,
+            ["<C-p>"] = actions.move_selection_previous,
+          },
+          n = {
+            ["<C-n>"] = actions.move_selection_next,
+            ["<C-p>"] = actions.move_selection_previous,
+          },
         },
       },
       pickers = {
-        -- Configuration de la recherche de fichiers
         find_files = {
           find_command = {
             "rg",
@@ -56,12 +72,9 @@ return {
             "--glob", "!**/*.class",
             "--glob", "!**/*.wasm",
           },
-          -- Activer la prévisualisation pour la recherche de fichiers
           previewer = true,
         },
-        -- Configuration de la recherche en temps réel (live grep)
         live_grep = {
-          -- Activer la prévisualisation pour live grep
           previewer = true,
         },
       },
@@ -75,7 +88,6 @@ return {
       },
     })
 
-    -- Charger l'extension fzf pour améliorer les performances de recherche
     telescope.load_extension("fzf")
   end,
   keys = {

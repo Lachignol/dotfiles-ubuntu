@@ -23,7 +23,7 @@ return {
       notifier = { enabled = true, timeout = 3000 },
 
       -- Sélecteur/picker universel pour fichiers, buffers, etc.
-      picker = { enabled = true },
+      picker = { enabled = false },
 
       -- Ouvre les fichiers très rapidement au démarrage (avant le chargement complet des plugins)
       quickfile = { enabled = true },
