@@ -11,7 +11,7 @@ return {
       dashboard = { enabled = false },
 
       -- Explorateur de fichiers intégré (picker déguisé)
-      explorer = { enabled = true },
+      explorer = { enabled = false },
 
       -- Affiche des guides et scopes d’indentation visuels
       indent = { enabled = true },
@@ -40,6 +40,9 @@ return {
       -- Affiche automatiquement les références LSP et permet de naviguer rapidement entre elles
       words = { enabled = true },
 
+       -- Visualiseur d'images (Kitty)
+      image        = { enabled = true  },
+
       -- Snacks supplémentaires, désactivés par défaut :
       animate      = { enabled = false }, -- Animations et easing
       bufdelete    = { enabled = false }, -- Suppression de buffers sans fermer la fenêtre
@@ -47,7 +50,6 @@ return {
       dim          = { enabled = false }, -- Met en avant la zone active
       git          = { enabled = false }, -- Fonctions Git
       gitbrowse    = { enabled = false }, -- Ouvre fichiers/branches sur GitHub/GitLab
-      image        = { enabled = false }, -- Visualiseur d'images (Kitty)
       layout       = { enabled = false }, -- Gestion avancée des layouts
       lazygit      = { enabled = false }, -- Intégration LazyGit
       profiler     = { enabled = false }, -- Profileur Lua
@@ -63,18 +65,18 @@ return {
     -- Raccourcis recommandés pour accéder rapidement aux fonctionnalités Snacks
     keys = {
       -- Toggle l'explorateur Snacks (ouvre/ferme avec <leader>e)
-      {
-        "<leader>e",
-        function()
-          -- Toggle Snacks Explorer : ferme si déjà ouvert, sinon ouvre
-          if vim.bo.filetype == "snacks_explorer" then
-            vim.cmd("close")
-          else
-            Snacks.explorer()
-          end
-        end,
-        desc = "Toggle Snacks Explorer",
-      },
+     --{
+     --   "<leader>e",
+     --   function()
+     --     -- Toggle Snacks Explorer : ferme si déjà ouvert, sinon ouvre
+     --     if vim.bo.filetype == "snacks_explorer" then
+     --       vim.cmd("close")
+     --     else
+     --       Snacks.explorer()
+     --     end
+     --   end,
+     --   desc = "Toggle Snacks Explorer",
+     -- },
 
       -- -- Ouvre le picker intelligent (fichiers, projets, etc.)
       -- { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
