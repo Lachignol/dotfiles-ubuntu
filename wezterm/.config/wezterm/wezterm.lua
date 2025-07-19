@@ -117,8 +117,6 @@ config.window_padding = {
 }
 -- Désactive les warnings de glyphes manquants
 config.warn_about_missing_glyphs = false
--- Police personnalisée
-config.font = wezterm.font("Source Code Pro Nerd Font", { weight = "Regular" })
 -- Réglage du rendu de la barre de défilement
 config.scrollback_lines = 10000  -- Nombre de lignes de défilement en mémoire
 
