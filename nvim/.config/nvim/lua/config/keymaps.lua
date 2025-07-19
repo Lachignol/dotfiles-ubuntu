@@ -23,6 +23,9 @@ vim.keymap.set("n", "<leader>bd", ":bd<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { noremap = true, silent = true })
 -- naviguer entre les buffers vers la droite avec shift + l
 vim.keymap.set("n", "<S-l>", ":bnext<CR>", { noremap = true, silent = true })
+-- revien au dernier buffer avec <leader> et tabulation
+vim.api.nvim_set_keymap('n', '<leader><tab>', ':b#<CR>', { noremap = true, silent = true, desc = "Revenir au dernier buffer" })
+
 
 -------WINDOW-------------------------------------------------------------------
 -- Bouger entre les fenetres split avec Ctrl + {h,j,k,l}

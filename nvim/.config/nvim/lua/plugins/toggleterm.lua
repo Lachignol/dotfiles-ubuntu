@@ -29,6 +29,8 @@ return {
     }
 
     -- 🧩 Raccourcis personnalisés
+    -- Sort du mode insert en terminal avec <Esc>
+    vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
 
     -- Ctrl + _ → terminal horizontal
     vim.api.nvim_set_keymap('n', '<c-\\>', '<cmd>ToggleTerm direction=horizontal<CR>', { noremap = true, silent = true })

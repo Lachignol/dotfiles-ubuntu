@@ -14,7 +14,7 @@ return {
       explorer = { enabled = false },
 
       -- Affiche des guides et scopes d’indentation visuels
-      indent = { enabled = true },
+      indent = { enabled = false },
 
       -- Améliore l’UI pour les entrées utilisateur (vim.ui.input)
       input = { enabled = true },

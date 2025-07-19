@@ -17,7 +17,21 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     spec = {
-        -- Import your custom plugins
+        -- Ajout de nvim-treesitter
+        {
+            "nvim-treesitter/nvim-treesitter",
+            build = ":TSUpdate",
+            event = { "BufReadPost", "BufNewFile" },
+            config = function()
+                require("nvim-treesitter.configs").setup {
+                    ensure_installed = { "lua", "python", "go", "c", "cpp" },
+                    highlight = { enable = true },
+                    indent = { enable = true },
+                }
+            end,
+        },
+
+        -- Import de tes autres plugins
         { import = "plugins" },
         { import = "colorscheme" },
 
@@ -39,43 +53,45 @@ require("lazy").setup({
 
         -- Mason and Mason-LSPConfig
         { "williamboman/mason.nvim" },
-        { "williamboman/mason-lspconfig.nvim",
-          dependencies = "williamboman/mason.nvim",
-          config = function()
-            require("mason-lspconfig").setup {
-              ensure_installed = { "gopls", "lua_ls", "pyright", "clangd" }, -- Liste des serveurs LSP à installer
-            }
-          end
+        {
+            "williamboman/mason-lspconfig.nvim",
+            dependencies = "williamboman/mason.nvim",
+            config = function()
+                require("mason-lspconfig").setup {
+                    ensure_installed = { "gopls", "lua_ls", "pyright", "clangd" },
+                }
+            end,
         },
-	-- None-LS pour les formateurs et linters
-	{
-	    "nvimtools/none-ls.nvim",
-	    event = { "BufReadPre", "BufNewFile" },
-	    dependencies = { "nvim-lua/plenary.nvim" },
-	    config = function()
-		local null_ls = require("null-ls") -- Le module reste nommé null-ls pour des raisons de compatibilité
-		null_ls.setup({
-		    sources = {
-			null_ls.builtins.formatting.stylua, -- Formateur Lua
-			-- null_ls.builtins.diagnostics.flake8, -- Linter Python
-			-- null_ls.builtins.formatting.black, -- Formateur Python
-		    },
-		})
-	    end,
-	},
 
+        -- None-LS pour les formateurs et linters
+        {
+            "nvimtools/none-ls.nvim",
+            event = { "BufReadPre", "BufNewFile" },
+            dependencies = { "nvim-lua/plenary.nvim" },
+            config = function()
+                local null_ls = require("null-ls")
+                null_ls.setup({
+                    sources = {
+                        null_ls.builtins.formatting.stylua,
+                        -- null_ls.builtins.diagnostics.flake8,
+                        -- null_ls.builtins.formatting.black,
+                    },
+                })
+            end,
+        },
 
         -- Golang tools
-        { "golang/tools",
-          dependencies = { "fatih/vim-go", "nvim-lua/plenary.nvim" },
-          ft = { "go" }, -- Charger uniquement pour les fichiers Go
+        {
+            "golang/tools",
+            dependencies = { "fatih/vim-go", "nvim-lua/plenary.nvim" },
+            ft = { "go" },
         },
     },
     defaults = {
         lazy = false,
-        version = false, -- always use the latest git commit
+        version = false,
     },
-    checker = { enabled = true, notify = false }, -- automatically check for plugin updates
+    checker = { enabled = true, notify = false },
     performance = {
         rtp = {
             disabled_plugins = {
@@ -88,3 +104,4 @@ require("lazy").setup({
         },
     },
 })
+
