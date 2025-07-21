@@ -6,61 +6,60 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
--- Activation du presse-papiers
+-- 👉 Chargement du thème personnalisé (à côté de ce fichier)
+config.colors = require("cyberdream")
+
+-- 👉 Chargement du cursor par default
+config.default_cursor_style = 'BlinkingBlock'
+
+
+-- -- 👉 Effet scanlines (image PNG avec transparence)
+-- config.window_background_opacity = 1
+-- config.window_background_image_hsb = { brightness = 0.25, hue = 1.0, saturation = 1.0 }
+-- config.macos_window_background_blur = 0 -- 📨 Mets 10+ si tu veux un effet flou derrière
+
+-- 🎯 Activation du presse-papiers et autres options utiles
 config.enable_wayland = true
 config.enable_scroll_bar = true
 config.force_reverse_video_cursor = true
 
--- Raccourcis clavier personnalisés
+-- 🎹 Raccourcis clavier personnalisés
 config.keys = {
-  -- Ouvrir un nouveau terminal
   {
     key = 'i',
     mods = 'SHIFT|CTRL',
     action = wezterm.action.SpawnWindow,
   },
-  
-  -- Ouvrir un nouveau onglet
   {
     key = 't',
     mods = 'SHIFT|CTRL',
     action = wezterm.action.SpawnTab 'CurrentPaneDomain',
   },
-  
-  -- Diviser la fenêtre verticalement
   {
     key = 'e',
     mods = 'SHIFT|CTRL',
     action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
   },
-  
-  -- Diviser la fenêtre horizontalement
   {
     key = 'o',
     mods = 'SHIFT|CTRL',
     action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
   },
-  -- Copier (ergonomique)
-{
-  key = 'c',
-  mods = 'SHIFT|CTRL',
-  action = wezterm.action.CopyTo 'Clipboard',
-},
-
-  -- Coller (ergonomique)
+  {
+    key = 'c',
+    mods = 'SHIFT|CTRL',
+    action = wezterm.action.CopyTo 'Clipboard',
+  },
   {
     key = 'v',
     mods = 'SHIFT|CTRL',
     action = wezterm.action.PasteFrom 'Clipboard',
   },
-  -- Fermer le panneau actuel
   {
     key = 'x',
     mods = 'SHIFT|CTRL',
     action = wezterm.action.CloseCurrentPane { confirm = true },
   },
-
-  -- Pour que neovim fonctionne avec les touches CTRL+h/j/k/l
   {
     key = 'h',
     mods = 'CTRL',
@@ -81,8 +80,6 @@ config.keys = {
     mods = 'CTRL',
     action = wezterm.action.SendKey { key = 'l', mods = 'CTRL' },
   },
-
-  -- Naviguer entre les panneaux
   {
     key = 'h',
     mods = 'SHIFT|CTRL',
@@ -105,20 +102,16 @@ config.keys = {
   },
 }
 
--- Définir un thème de couleurs
-config.colors = require("cyberdream")  -- Assure-toi que le thème Catppuccin est installé dans ton WezTerm (ou remplace par un autre thème si tu préfères)
-
--- Réglages supplémentaires pour améliorer l'expérience avec Neovim
+-- 📐 Réglages visuels
 config.window_padding = {
   left = 5,
   right = 5,
   top = 5,
   bottom = 5,
 }
--- Désactive les warnings de glyphes manquants
+
 config.warn_about_missing_glyphs = false
--- Réglage du rendu de la barre de défilement
-config.scrollback_lines = 10000  -- Nombre de lignes de défilement en mémoire
+config.scrollback_lines = 10000
 
 return config
 

@@ -1,19 +1,50 @@
--- cyberdream theme for wezterm
+-- cyberdream retro theme for wezterm adapté
 return {
-    foreground = "#ffffff",
-    background = "#16181a",
+  -- -- Couleurs principales
+  foreground = "#00ff00",         -- Texte vert vif “hacker”
+  background = "#000000",         -- Noir CRT
 
-    cursor_bg = "#ffffff",
-    cursor_fg = "#16181a",
-    cursor_border = "#ffffff",
+  -- Curseur et sélection “rétro phosphore”
+  cursor_bg = "#00ff00",
+  cursor_fg = "#000000",
+  cursor_border = "#00ff00",
+  selection_bg = "#005500",       -- Vert foncé phosphore
+  selection_fg = "#00ff00",       -- Texte vert sur sélection
 
-    selection_fg = "#ffffff",
-    selection_bg = "#3c4048",
+  -- Couleurs ANSI (classiques, options rétro)
+  ansi = {
+    "#000000", -- noir pur
+    "#ff0000", -- rouge
+    "#00ff00", -- vert vif
+    "#ffff00", -- jaune
+    "#0080ff", -- bleu rétro
+    "#ff00ff", -- magenta
+    "#00ffff", -- cyan
+    "#bfbfbf"  -- gris clair
+  },
+  brights = {
+    "#222222", -- noir plus clair
+    "#ff3333", -- rouge clair
+    "#66ff66", -- vert très clair
+    "#ffff66", -- jaune clair
+    "#33bbff", -- bleu clair
+    "#ff66ff", -- magenta clair
+    "#66ffff", -- cyan clair
+    "#ffffff"  -- blanc pur
+  },
 
-    scrollbar_thumb = "#16181a",
-    split = "#16181a",
-
-    ansi = { "#16181a", "#ff6e5e", "#5eff6c", "#f1ff5e", "#5ea1ff", "#bd5eff", "#5ef1ff", "#ffffff" },
-    brights = { "#3c4048", "#ff6e5e", "#5eff6c", "#f1ff5e", "#5ea1ff", "#bd5eff", "#5ef1ff", "#ffffff" },
-    indexed = { [16] = "#ffbd5e", [17] = "#ff6e5e" },
+  -- Tab bar look rétro/foncé
+  tab_bar = {
+    background = "#000000",
+    active_tab = {
+      bg_color = "#000000",
+      fg_color = "#00ff00",
+      intensity = "Bold",
+    },
+    inactive_tab = {
+      bg_color = "#111111",
+      fg_color = "#007700"
+    }
+  }
 }
+
