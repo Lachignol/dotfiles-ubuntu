@@ -11,3 +11,5 @@ Exemple:
 stow nvim
 stow tmux
 stow zsh
+
+ps: pour neovim installer fzf et ripgrep
