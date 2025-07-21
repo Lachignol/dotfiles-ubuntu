@@ -1,17 +1,21 @@
 return {
-  {
-    "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup()
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "gopls", "lua_ls", "pyright", "clangd" }, -- Ajoutez les serveurs LSP nécessaires
-      })
-    end,
-  },
+  "williamboman/mason.nvim",
+  dependencies = { "williamboman/mason-lspconfig.nvim" },
+  config = function()
+    local mason = require("mason")
+    local mason_lspconfig = require("mason-lspconfig")
+
+    mason.setup()
+
+    mason_lspconfig.setup({
+      ensure_installed = {
+        "gopls",
+        "lua_ls",
+        "pyright",
+        "clangd",
+        "ts_ls",
+      },
+    })
+  end,
 }
-   
+

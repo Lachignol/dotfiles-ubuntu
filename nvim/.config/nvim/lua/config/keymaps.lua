@@ -63,4 +63,3 @@ vim.api.nvim_set_keymap("n", "<leader>/",":nohlsearch<CR>", {noremap = true,sile
 -------Mapper Ctrl-S pour enregistrer le buffer---------------------------------------
 vim.keymap.set("n", "<C-s>", ":w<CR>", { noremap = true, silent = true }) -- Mode normal
 vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>a", { noremap = true, silent = true }) -- Mode insertion
-
