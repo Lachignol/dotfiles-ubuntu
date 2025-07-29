@@ -63,3 +63,14 @@ vim.api.nvim_set_keymap("n", "<leader>/",":nohlsearch<CR>", {noremap = true,sile
 -------Mapper Ctrl-S pour enregistrer le buffer---------------------------------------
 vim.keymap.set("n", "<C-s>", ":w<CR>", { noremap = true, silent = true }) -- Mode normal
 vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>a", { noremap = true, silent = true }) -- Mode insertion
+
+------Deplacement de texte ou ligne vers le haut avec k ou le bas avec h--------------
+-- Déplace le texte sélectionné vers le haut en mode visuel (activé avec v)
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv-gv", { desc = "Déplace le texte sélectionné vers le haut en mode visuel" })
+-- Déplace le texte sélectionné vers le bas en mode visuel (activé avec v)
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv-gv", { desc = "Déplace le texte sélectionné vers le bas en mode visuel" })
+
+-- Déplace le texte sélectionné vers le haut en mode visuel bloc (activé avec V)
+vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv", { desc = "Déplace le texte sélectionné vers le haut en mode visuel bloc" })
+-- Déplace le texte sélectionné vers le bas en mode visuel bloc (activé avec V)
+vim.keymap.set("x", "<A-j>", ":move '>+1<CR>gv-gv", { desc = "Déplace le texte sélectionné vers le bas en mode visuel bloc" })
