@@ -5,3 +5,4 @@ vim.opt.expandtab = false
 vim.opt.cursorline = true -- Highlight the current line
 -- Disable format on save globally
 vim.g.autoformat = false
+vim.opt.clipboard = "unnamedplus" -- on utilise le presse papier du système par défaut
